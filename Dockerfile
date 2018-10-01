@@ -21,10 +21,14 @@ RUN mkdir /etc/ansible/ /ansible
 RUN echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
 
+RUN apk --update add python py-pip openssl ca-certificates py-openssl wget
+RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python-dev py-pip build-base
+
+ARG ANSIBLE_VERSION
+
 RUN \
-  curl -fsSL https://releases.ansible.com/ansible/ansible-2.2.2.0.tar.gz -o ansible.tar.gz && \
-  tar -xzf ansible.tar.gz -C ansible --strip-components 1 && \
-  rm -fr ansible.tar.gz /ansible/docs /ansible/examples /ansible/packaging
+     pip install requests[security] \
+  && pip install ansible==$ANSIBLE_VERSION markupsafe 
 
 RUN mkdir -p /ansible/playbooks
 WORKDIR /ansible/playbooks
