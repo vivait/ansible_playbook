@@ -14,6 +14,7 @@ RUN \
     py-setuptools \
     py-yaml \
     rsync \
+    git \
     tar && \
   pip install --upgrade pip python-keyczar && \
   rm -rf /var/cache/apk/*
