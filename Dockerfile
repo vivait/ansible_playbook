@@ -26,7 +26,7 @@ RUN echo "[local]" >> /etc/ansible/hosts && \
 RUN apk --update add python py-pip openssl ca-certificates py-openssl wget
 RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python-dev py-pip build-base
 
-ARG ANSIBLE_VERSION
+ARG ANSIBLE_VERSION=2.5.6
 
 RUN \
      pip install requests[security] \
